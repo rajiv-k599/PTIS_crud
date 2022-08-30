@@ -5,9 +5,10 @@
     ViewData["Title"] = "Info Page";
 }
 <head>
-<link rel="stylesheet" href="~/css/table.css" />
+@*<link rel="stylesheet" href="~/css/table.css" />*@
 </head>
-@model List<SimpleCrud.Models.Student>
+@*@model List<SimpleCrud.Models.Student>*@
+@*@model SimpleCrud.ViewModel.AddViewModel*@
 <style>
 
 </style>
@@ -29,6 +30,7 @@
             <th>Semester</th>
             <th>Enrollment Date</th>
             <th>Reg no</th>
+            <th>Image</th>
             <th>Action</th>
   </tr>
   @foreach (var item in Model)
@@ -41,11 +43,13 @@
             <td>@item.Dob.ToString("dd-mm-yyyy")</td>
             <td>@item.Gender</td>
             <td>@item.Faculty</td>
-            <td>@item.Semester</td>
+            <td>@item.Semester Semester</td>
             <td>@item.Eroll.ToString("dd-mm-yyyy")</td>
             <td>@item.Reg</td>
-            <td><a href="View/@item.Id">View</a>
-                <a href="Delete/@item.Id">Delete</a>
+            <td><img src="/Images/@item.Image" style="width:40px; height:40px" /></td>
+                <td>
+                    <a href="View/@item.Id">View</a>
+                    <a href="Delete/@item.Id?img=@item.Image">Delete</a>
             </td>
         </tr>
     }

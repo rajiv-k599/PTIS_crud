@@ -3,7 +3,7 @@
 }
 
 <div class="">
-    <form class="row g-3" asp-controller="Home" asp-action="AddInfo">
+    <form class="row g-3" enctype="multipart/form-data" asp-controller="Home" asp-action="AddInfo">
 
         <label class="text-center">General Information</label>
         <div class="col-md-6">
@@ -71,6 +71,11 @@
         <div class="col-md-6">
             <label for="inputPassword4" class="form-label">Reg no:</label>
             <input type="text" class="form-control" id="Email" name="Reg">
+        </div>
+
+        <div class="mb-3">
+            <label for="formFileSm" class="form-label">Upload Image</label>
+            <input class="form-control form-control-sm" id="formFileSm" name="Image" type="file">
         </div>
         
         <div class="col-12">

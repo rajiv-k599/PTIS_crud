@@ -5,7 +5,7 @@
 }
 @model SimpleCrud.ViewModel.UpdateVm
 
-<form class="row g-3" asp-controller="Home" asp-action="Update">
+<form class="row g-3" enctype="multipart/form-data" asp-controller="Home" asp-action="Update">
     <label class="text-center">General Information</label>
     <input type="hidden" class="form-control" asp-for="Id" id="inputEmail4">
     <div class="col-md-6">
@@ -73,6 +73,11 @@
     <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Reg no:</label>
         <input type="text" class="form-control" id="Email" asp-for="Reg">
+    </div>
+   
+    <div class="mb-3">
+        <label for="formFileSm" class="form-label">Upload Image</label>
+        <input class="form-control form-control-sm" id="formFileSm" asp-for="Image" type="file">
     </div>
 
     <div class="col-12">

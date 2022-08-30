@@ -37,5 +37,9 @@ namespace SimpleCrud.Models
 
         [Required]
         public int Reg { get; set; } = default;
+
+        public String? Image { get; set; }
+
+       
     }
 }

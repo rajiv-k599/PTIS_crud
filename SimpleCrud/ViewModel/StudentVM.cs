@@ -10,7 +10,7 @@ namespace SimpleCrud.ViewModel
         public string? Email { get; set; }
         public string? Address { get; set; }
         public string? Gender { get; set; } = default;
-        public string? Faculuy { get; set; } = default;
+        public string? Faculty { get; set; } = default;
         public int Phone { get; set; } = default;
 
         public DateTime Dob { get; set; }
@@ -22,6 +22,8 @@ namespace SimpleCrud.ViewModel
 
         
         public int Reg { get; set; } = default;
+
+        public IFormFile? Image { get; set; }
         //public List<Student> students { get; set; }
     }
 }
