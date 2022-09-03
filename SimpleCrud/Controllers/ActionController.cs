@@ -5,17 +5,23 @@ using SimpleCrud.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Xml.Linq;
 using SimpleCrud.ViewModel;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace SimpleCrud.Controllers
 {
     public class ActionController : Controller
     {
         private readonly AppDbContext Context;
+        private readonly INotyfService _notyf;
 
-        public ActionController(AppDbContext _context)
+        private readonly IWebHostEnvironment WebHostEnvironment;
+
+        // private AppDbContext db = new AppDbContext();
+        public ActionController(AppDbContext _context, IWebHostEnvironment webHostEnvironment, INotyfService notyf)
         {
             this.Context = _context;
-
+            WebHostEnvironment = webHostEnvironment;
+            _notyf = notyf;
         }
         public IActionResult AddInfo(Student s)
         {

@@ -2,23 +2,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="">
-    <form class="row g-3" enctype="multipart/form-data" asp-controller="Home" asp-action="AddInfo">
-
-        <label class="text-center">General Information</label>
-        <div class="col-md-6">
+<div class="m-5">
+    <form class="row g-3" id="f1" enctype="multipart/form-data" asp-controller="Home" asp-action="AddInfo">
+        <h4 class="text-center">General Information</h4>
+        <div class="col-sm-6">
             <label for="inputEmail4" class="form-label">Name</label>
             <input type="text" class="form-control" name="Name" id="inputEmail4">
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="inputPassword4" class="form-label">Email</label>
             <input type="text" class="form-control" id="Email" name="Email">
         </div>
-        <div class="col-12">
+        <div class="col-sm-12">
             <label for="inputAddress" class="form-label">Address</label>
             <input type="text" class="form-control" id="inputAddress" name="Address" placeholder="1234 Main St">
         </div>
-       <div class="col-12">  
+       <div class="col-sm-12">  
             <label class="form-check-label" for="inlineCheckbox1">Gender :</label>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="inlineCheckbox1" name="Gender" value="Male">
@@ -30,28 +29,27 @@
             </div>
            
        </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="inputCity" class="form-label">Phone NO:</label>
             <input type="number" class="form-control" name="Phone" id="inputCity">
         </div>
         
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="inputZip" class="form-label">DOB:</label>
             <input type="Date" class="form-control" id="inputdate" name="Dob" required>
         </div>
-        <div class="col-12">
-           <label>Academic Details</label>
+        <div class="col-sm-12">
+           <h4 class="text-center">Academic Details</h4>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="inputCity" class="form-label">Faculty:</label>
-            <select class="form-select" aria-label="Default select example" name="Faculty">    
-                <option value="BCA">BCA</option>
-                <option value="BBA">BBA</option>
-                <option value="BIM">BIM</option>
-                <option value="BBS">BBS</option>
+            <select class="form-select" aria-label="Default select example" name="Faculty"> 
+                 @foreach (var item in Model){
+                <option value="@item.FacultyName">@item.FacultyName</option>
+                 }
             </select>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="inputCity" class="form-label">Semester:</label>
             <select class="form-select" aria-label="Default select example" name="Semester">
                 <option value="1">1 semester</option>
@@ -64,21 +62,21 @@
                 <option value="8">8 semester</option>
             </select>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="inputEmail4" class="form-label">Enrollment Date</label>
             <input type="date" class="form-control" name="Eroll" id="inputEmail4" required>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="inputPassword4" class="form-label">Reg no:</label>
             <input type="text" class="form-control" id="Email" name="Reg">
         </div>
 
-        <div class="mb-3">
+        <div class="">
             <label for="formFileSm" class="form-label">Upload Image</label>
             <input class="form-control form-control-sm" id="formFileSm" name="Image" type="file">
         </div>
         
-        <div class="col-12">
+        <div class="col-sm-12">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>

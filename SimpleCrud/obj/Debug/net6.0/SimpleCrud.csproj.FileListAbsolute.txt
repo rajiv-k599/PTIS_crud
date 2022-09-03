@@ -355,3 +355,11 @@ D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis
 D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\rajiv dotnet\SimpleCrud\SimpleCrud\obj\Debug\net6.0\SimpleCrud.MvcApplicationPartsAssemblyInfo.cs
+D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\NToastNotify.dll
+D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\AspNetCoreHero.ToastNotification.Views.dll
+D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\AspNetCoreHero.ToastNotification.dll
+D:\rajiv dotnet\SimpleCrud\SimpleCrud\bin\Debug\net6.0\BCrypt.Net-Next.dll

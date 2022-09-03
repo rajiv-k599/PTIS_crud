@@ -20,3 +20,20 @@ function myFunction() {
         }
     }
 }
+$(document).ready(function () {
+    $('#confirm').keyup(function () {
+        var password = $('#new').val();
+        var confirmpassword = $('#confirm').val();
+        if (confirmpassword != password) {
+            $('#Error').html('**Password Not Matched**');
+            $('#Error').css('color', 'red');
+            return false;
+        } else {
+            $('#Error').html('**Password Matched**');
+            $('#Error').css('color', 'green');
+            return true;
+        }
+
+
+    });
+});

@@ -1,40 +1,86 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
+using NToastNotify;
 using SimpleCrud.Data;
 using SimpleCrud.Models;
 using SimpleCrud.ViewModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Http;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SimpleCrud.Controllers
 {
     public class HomeController : Controller
     {
         private readonly AppDbContext Context;
+        private readonly INotyfService _notyf;
 
         private readonly IWebHostEnvironment WebHostEnvironment;
 
         // private AppDbContext db = new AppDbContext();
-        public HomeController(AppDbContext _context,IWebHostEnvironment webHostEnvironment)
+        public HomeController(AppDbContext _context,IWebHostEnvironment webHostEnvironment, INotyfService notyf)
         {
             this.Context = _context;
             WebHostEnvironment = webHostEnvironment;
-         
+            _notyf = notyf;
         }
-       // private readonly ILogger<HomeController> _logger;
+
+        // private readonly ILogger<HomeController> _logger;
 
         //public HomeController(ILogger<HomeController> logger)
         //{
         //    _logger = logger;
         //}
+        [Authorize]
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(Context.Faculties.ToList());
+        }
+        [HttpPost]
+        public IActionResult Login(LoginVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = Context.Admins.Where(e => e.Email == model.Email).SingleOrDefault();
+                if (data != null)
+                {
+                    bool isValid = (data.Email == model.Email && data.Password == model.Password);
+                    if (isValid)
+                    {
+                        var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, model.Email) }, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var principal = new ClaimsPrincipal(identity);
+                        HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                        HttpContext.Session.SetString("Email", data.Email);
+                        HttpContext.Session.SetString("Name", data.AdminName);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["errorPassword"] = "Invalid Password!";
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    TempData["errorUsername"] = "Username not found!";
+                    return View(model);
+                }
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
+       
         [HttpPost]
         public IActionResult AddInfo(StudentVM s)
         {
@@ -56,6 +102,7 @@ namespace SimpleCrud.Controllers
 
              Context.Students.Add(std);
              Context.SaveChanges();
+            _notyf.Success("Success Notification");
             //ViewBag.data = s;
             //    this.Context.Students.Add(s);
 
@@ -79,7 +126,7 @@ namespace SimpleCrud.Controllers
             }
             return fileName;
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult StudentInfo()
         {
@@ -97,18 +144,19 @@ namespace SimpleCrud.Controllers
         public IActionResult View(int id)
         {
             var std = Context.Students.Find(id);
-           
+
+            ViewBag.model = Context.Faculties.ToList();
                var viewModel = new UpdateVm()
                {
-                   Id = std.Id,
-                   Name = std.Name,
-                   Email = std.Email,
-                   Address = std.Address,
-                   Phone = std.Phone,
-                   Gender = std.Gender,
-                   Dob = std.Dob,
-                   Faculty = std.Faculty,
-                   Semester = std.Semester,
+                    Id = std.Id,
+                    Name = std.Name,
+                    Email = std.Email,
+                    Address = std.Address,
+                    Phone = std.Phone,
+                    Gender = std.Gender,
+                    Dob = std.Dob,
+                    Faculty = std.Faculty,
+                    Semester = std.Semester,
                     Eroll = std.Eroll,
                     Reg = std.Reg,
                     Image = std.Image
@@ -128,15 +176,36 @@ namespace SimpleCrud.Controllers
             var data = Context.Students.Find(id);
             Context.Students.Remove(data);
             Context.SaveChanges();
+            _notyf.Error("Success Notification");
             return RedirectToAction("StudentInfo");
         }
         public IActionResult Update(StudentVM update)
         {
             string stringFile = upload(update);
 
+            //var student = Context.Students.Find(update.Id);
+            ////  users = this.Context.Users.Find(Id);
+            //string deletePath = Path.Combine(".\\wwwroot", "Images");
+            //string fileDeletePath = Path.Combine(deletePath, student.Image);
+            //FileInfo deleteFile = new FileInfo(fileDeletePath);
+            //if (deleteFile.Exists)
+            //{
+            //    deleteFile.Delete();
+            //}
+            //student.Image = stringFile;
+            //this.Context.Students.Update(student);
+            //Context.SaveChanges();
+
             if (update.Image != null)
             {
                 var student = Context.Students.Find(update.Id);
+                string delDir = Path.Combine(WebHostEnvironment.WebRootPath, "Images", student.Image);
+                FileInfo f1 = new FileInfo(delDir);
+                if (f1.Exists)
+                {
+                    System.IO.File.Delete(delDir);
+                    f1.Delete();
+                }
                 student.Name = update.Name;
                 student.Email = update.Email;
                 student.Address = update.Address;
@@ -149,8 +218,10 @@ namespace SimpleCrud.Controllers
                 student.Reg = update.Reg;
                 student.Image = stringFile;
                 Context.SaveChanges();
+                _notyf.Success("Success Notification");
                 return RedirectToAction("StudentInfo");
-            } else
+            }
+            else
             {
                 var student = Context.Students.Find(update.Id);
                 student.Name = update.Name;
@@ -165,10 +236,34 @@ namespace SimpleCrud.Controllers
                 student.Reg = update.Reg;
                
                 Context.SaveChanges();
+                _notyf.Success("Success Notification");
                 return RedirectToAction("StudentInfo");
 
             }
-           // return View("View");
+            // return View("View");
+          //  return RedirectToAction("StudentInfo");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var std = Context.Students.Find(id);
+
+            var viewModel = new UpdateVm()
+            {
+                Id = std.Id,
+                Name = std.Name,
+                Email = std.Email,
+                Address = std.Address,
+                Phone = std.Phone,
+                Gender = std.Gender,
+                Dob = std.Dob,
+                Faculty = std.Faculty,
+                Semester = std.Semester,
+                Eroll = std.Eroll,
+                Reg = std.Reg,
+                Image = std.Image
+            };
+            return View(viewModel);
             
         }
 

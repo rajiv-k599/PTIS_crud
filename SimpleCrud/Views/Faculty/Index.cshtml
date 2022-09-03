@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="">
+<h3>My Faculty</h3>
+<button type="button" class="btn btn-success pull-right mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add
+</button>
+</div>
+
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+ <table id="myTable" class="bg-light">
+    <tr class="header">
+            <th>Name</th>
+           
+            <th>Action</th>
+  </tr>
+  @foreach (var item in Model){
+  <tr>
+      <td>@item.FacultyName</td>
+       <td>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" onclick="viewFaculty('@item.Id','@item.FacultyName')" data-bs-target="#exampleModal2">
+            Edit
+        </button>
+            <a class="btn btn-outline-danger" href="/Faculty/Delete/@item.Id">Delete</a>
+       </td>
+   </tr>
+  }
+  </table>
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Faculty</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <form asp-controller="Faculty" asp-action="AddFaculty">
+           <input type="text" id="FacultyName" class="form-control form-control" name="FacultyName"/>
+            <div class="mt-2">
+                   <input class="btn btn-primary" type="submit" value="Submit" />
+            </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+      function viewFaculty(id,value){
+           $("#id").val(id);
+           $("#facultyName").val(value);
+          
+      }
+     </script>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Add Faculty</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <form asp-controller="Faculty" asp-action="UpdateFaculty">
+            <input type="hidden" id="id" class="form-control form-control" name="Id"/>
+            <input type="text" id="facultyName" class="form-control form-control" name="FacultyName"/>
+            <div class="mt-2">
+                   <input class="btn btn-primary" type="submit" value="Update" />
+            </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+ 

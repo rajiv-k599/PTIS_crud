@@ -16,7 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
-
+#f1 div{
+   padding:-10rem; 
+}
 /* {
     box-sizing: border-box;
 }

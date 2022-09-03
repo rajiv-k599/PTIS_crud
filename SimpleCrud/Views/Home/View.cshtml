@@ -8,7 +8,7 @@
 <form class="row g-3" enctype="multipart/form-data" asp-controller="Home" asp-action="Update">
     <label class="text-center">General Information</label>
     <input type="hidden" class="form-control" asp-for="Id" id="inputEmail4">
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <label for="inputEmail4" class="form-label">Name</label>
         <input type="text" class="form-control" asp-for="Name" id="inputEmail4">
     </div>
@@ -47,10 +47,9 @@
     <div class="col-md-6">
         <label for="inputCity" class="form-label">Faculty:</label>
         <select class="form-select" aria-label="Default select example" asp-for="Faculty">
-            <option value="BCA">BCA</option>
-            <option value="BBA">BBA</option>
-            <option value="BIM">BIM</option>
-            <option value="BBS">BBS</option>
+            @foreach (var item in ViewBag.model){
+                 <option value="@item.FacultyName">@item.FacultyName</option>
+            }
         </select>
     </div>
     <div class="col-md-6">

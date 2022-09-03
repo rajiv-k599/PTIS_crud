@@ -24,5 +24,7 @@ namespace SimpleCrud.ViewModel
         public int Reg { get; set; }
 
         public String? Image { get; set; }
+
+        public List<Faculty> faculties { get; set; }
     }
 }

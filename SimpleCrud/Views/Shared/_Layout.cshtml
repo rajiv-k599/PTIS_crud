@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,46 +11,94 @@
     <link rel="stylesheet" href="~/css/table.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SimpleCrud.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<body style="background:#E0ECF7;">
+   
+    <header style="background: #c5aa6a;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SimpleCrud</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><b><span style="color:#A5D732">Simple</span><span style="color:#6FA8DC">Crud</span></b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                     @if(User.Identity.IsAuthenticated){
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color:white">
+                                    Faculty
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Faculty" asp-action="Index">Add Faculty</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentInfo">Student Info</a>
-                        </li>
+                       
+                        <li>
+                        <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color:white">
+                                Student
+                            </a>
+                            <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Add Student</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentInfo">Student Info</a>
+                                    </li>
+                               
+                            </ul>
+                        </div>
+                      </li>
+                       
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Details">Details</a>
+                        </li>*@
                     </ul>
+                    }
                 </div>
             </div>
+            @if(User.Identity.IsAuthenticated){
+                <div class="d-flex m-2">
+                    <div class="d-flex p-2">
+                        <span> Welcome </span> <span class="ps-1 text-success"><b>@HttpContextAccessor.HttpContext.Session.GetString("Name")</b></span>
+
+                     </div>
+                    <div> <a class="btn btn-sm btn-danger" asp-action="LogOut" asp-controller="Admin"> SignOut </a></div>
+                  </div>
+               }else{
+            <a type="button" class="btn btn-outline-primary me-3" asp-controller="Admin" asp-action="Index">Login</a>
+            <a type="button" class="btn btn-outline-success me-2" asp-controller="Admin" asp-action="Register">Register</a>
+               }
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-1">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - SimpleCrud - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+@*
+    <footer class="border-top footer text-muted" style="background:#43464A;">
+        <div class="container" style="color:white;">
+            &copy; 2022 - SimpleCrud @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+     @*   </div>
+    </footer>*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/table.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+   
+  
+   
+    
+    @await Component.InvokeAsync("Notyf")
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -32,3 +32,9 @@
         #myTable tr.header, #myTable tr:hover {
             background-color: #f1f1f1;
         }
+#f1 div {
+    padding-top: -3rem;
+}
+#f1{
+    margin-top: -4rem;
+}
