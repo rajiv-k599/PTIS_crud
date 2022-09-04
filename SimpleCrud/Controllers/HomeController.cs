@@ -52,7 +52,7 @@ namespace SimpleCrud.Controllers
                 var data = Context.Admins.Where(e => e.Email == model.Email).SingleOrDefault();
                 if (data != null)
                 {
-                    bool isValid = (data.Email == model.Email && data.Password == model.Password);
+                    bool isValid = (data.Email == model.Email && BCrypt.Net.BCrypt.Verify(model.Password,data.Password));
                     if (isValid)
                     {
                         var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, model.Email) }, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -65,18 +65,18 @@ namespace SimpleCrud.Controllers
                     else
                     {
                         TempData["errorPassword"] = "Invalid Password!";
-                        return View(model);
+                        return RedirectToAction("Index","Admin");
                     }
                 }
                 else
                 {
                     TempData["errorUsername"] = "Username not found!";
-                    return View(model);
+                    return RedirectToAction("Index", "Admin");
                 }
             }
             else
             {
-                return View(model);
+                return RedirectToAction("Index", "Admin");
             }
         }
 
@@ -102,7 +102,7 @@ namespace SimpleCrud.Controllers
 
              Context.Students.Add(std);
              Context.SaveChanges();
-            _notyf.Success("Success Notification");
+            _notyf.Success("Inserted Success");
             //ViewBag.data = s;
             //    this.Context.Students.Add(s);
 
@@ -176,7 +176,7 @@ namespace SimpleCrud.Controllers
             var data = Context.Students.Find(id);
             Context.Students.Remove(data);
             Context.SaveChanges();
-            _notyf.Error("Success Notification");
+            _notyf.Error("Deleted Success");
             return RedirectToAction("StudentInfo");
         }
         public IActionResult Update(StudentVM update)
@@ -209,7 +209,7 @@ namespace SimpleCrud.Controllers
                 student.Name = update.Name;
                 student.Email = update.Email;
                 student.Address = update.Address;
-                student.Phone = update.Phone;
+                student.Phone = (int)update.Phone;
                 student.Gender = update.Gender;
                 student.Dob = update.Dob;
                 student.Faculty = update.Faculty;
@@ -218,7 +218,7 @@ namespace SimpleCrud.Controllers
                 student.Reg = update.Reg;
                 student.Image = stringFile;
                 Context.SaveChanges();
-                _notyf.Success("Success Notification");
+                _notyf.Success("Updated Success");
                 return RedirectToAction("StudentInfo");
             }
             else
@@ -227,7 +227,7 @@ namespace SimpleCrud.Controllers
                 student.Name = update.Name;
                 student.Email = update.Email;
                 student.Address = update.Address;
-                student.Phone = update.Phone;
+                student.Phone = (int)update.Phone;
                 student.Gender = update.Gender;
                 student.Dob = update.Dob;
                 student.Faculty = update.Faculty;
@@ -236,7 +236,7 @@ namespace SimpleCrud.Controllers
                 student.Reg = update.Reg;
                
                 Context.SaveChanges();
-                _notyf.Success("Success Notification");
+                _notyf.Success("Updated Success");
                 return RedirectToAction("StudentInfo");
 
             }

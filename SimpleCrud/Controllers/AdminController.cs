@@ -30,17 +30,20 @@ namespace SimpleCrud.Controllers
         {
             return View();
         }
+        [HttpPost]
         public IActionResult RegisterInfo(AdminVM A)
         {
+            string password= BCrypt.Net.BCrypt.HashPassword(A.Password);
             if (ModelState.IsValid)
             {
+
                 var reg = new Admin
                 {
                     AdminName = A.AdminName,
                     Email = A.Email,
                     Gender = A.Gender,
                     Phone = A.Phone,
-                    Password = A.Password
+                    Password = password
                 };
                 Context.Admins.Add(reg);
                 Context.SaveChanges();

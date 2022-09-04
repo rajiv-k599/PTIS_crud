@@ -25,7 +25,7 @@ namespace SimpleCrud.Models
         public string? Gender { get; set; } = default;
 
         [Required]
-        public int Phone { get; set; } = default;
+        public long Phone { get; set; } = default;
 
         [Required]
         public DateTime Dob { get; set; }

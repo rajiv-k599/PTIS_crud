@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OsKbWCHXlcQAXqFtnKfFoLFsa4Ql88BrtYD3iJtC6h4=",
+  "Hash": "q/x4Cpe8tVeayPKplLduV1nStjjiYRug8d8gPMnc+cE=",
   "Source": "SimpleCrud",
   "BasePath": "_content/SimpleCrud",
   "Mode": "Default",
@@ -321,6 +321,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\b9a1e1a2-3bcb-4808-aa1f-4fd0a9268117-IMG_20211214_141329.jpg"
+    },
+    {
+      "Identity": "D:\\rajiv dotnet\\SimpleCrud\\SimpleCrud\\wwwroot\\Images\\c5cc635b-b39e-4625-90c8-095518c34720-IMG_20211214_141502.jpg",
+      "SourceId": "SimpleCrud",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\rajiv dotnet\\SimpleCrud\\SimpleCrud\\wwwroot\\",
+      "BasePath": "_content/SimpleCrud",
+      "RelativePath": "Images/c5cc635b-b39e-4625-90c8-095518c34720-IMG_20211214_141502.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\c5cc635b-b39e-4625-90c8-095518c34720-IMG_20211214_141502.jpg"
     },
     {
       "Identity": "D:\\rajiv dotnet\\SimpleCrud\\SimpleCrud\\wwwroot\\Images\\d246b3bf-3058-4cb4-8d3b-faad6ec204ad-IMG_20211220_091423_TIMEBURST5.jpg",

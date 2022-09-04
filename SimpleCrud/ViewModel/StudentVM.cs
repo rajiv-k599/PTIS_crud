@@ -11,7 +11,7 @@ namespace SimpleCrud.ViewModel
         public string? Address { get; set; }
         public string? Gender { get; set; } = default;
         public string? Faculty { get; set; } = default;
-        public int Phone { get; set; } = default;
+        public long Phone { get; set; } = default;
 
         public DateTime Dob { get; set; }
        

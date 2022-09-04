@@ -16,12 +16,14 @@
 
 
                                 <div class="form-outline ">
-                                    <input type="email" id="form3Example3cg" name="Email" class="form-control form-control-lg" />
+                                    <h3 class="text-danger">@TempData["errorUsername"]</h3>
+                                    <input type="email" id="form3Example3cg" name="Email" class="form-control" />
                                     <label class="form-label" for="form3Example3cg">Your Email</label>
                                 </div>
 
                                 <div class="form-outline ">
-                                    <input type="password" id="form3Example4cg" name="Password" class="form-control form-control-lg" />
+                                    <h3 class="text-danger">@TempData["errorPassword"]</h3>
+                                    <input type="password" id="form3Example4cg" name="Password" class="form-control" />
                                     <label class="form-label" for="form3Example4cg">Password</label>
                                 </div>
 

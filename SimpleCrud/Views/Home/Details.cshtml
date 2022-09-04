@@ -10,7 +10,7 @@
             <img src="/Images/@Model.Image" class="rounded" style="width:15rem; height:15rem;" />
         </div>
         <div class="col-8 container rounded bg-light shadow">
-            <h4 class="text-center pt-1 text-uppercase"><u>General Details</u></h4>
+            <h4 class="text-center pt-1 text-uppercase border"><u>General Details</u></h4>
             <div class="p-2">Name: <span style="color:forestgreen">@Model.Name</span></div>
             <div class="p-2">Email: <span style="color:forestgreen">@Model.Email</span></div>
             <div class="p-2">Address: <span style="color:forestgreen">@Model.Address</span></div>
@@ -19,14 +19,14 @@
             <div class="p-2">Date of Birth: <span style="color:forestgreen">@Model.Dob.ToString("dd-mm-yyyy")</span></div>
         </div>
     </div>
-    <div class="row container rounded bg-light shadow m-2">
-        <h4 class="text-center pt-1 text-uppercase"><u>Academic Details</u></h4>
+    <div class="row container rounded bg-light shadow mt-4">
+        <h4 class="text-center pt-1 text-uppercase border"><u>Academic Details</u></h4>
         <div class="col-4 p-2">Faculty: <span style="color:forestgreen">@Model.Faculty</span></div>
         <div class="col-8 p-2">Semester: <span style="color:forestgreen">@Model.Semester semester</span></div>
         <div class="col-4 p-2">Enrollment No: <span style="color:forestgreen">@Model.Eroll.ToString("dd-mm-yyyy")</span></div>
         <div class="col-8 p-2">Reg No: <span style="color:forestgreen">@Model.Reg</span></div>
      </div>
-   <div class="ps-2">
+   <div class="ps-2 mt-3">
         <a class="btn btn-outline-primary" href="/Home/View/@Model.Id">Edit</a>
         <a class="btn btn-outline-danger" href="Delete/@Model.Id?img=@Model.Image">Delete</a>
    </div>
