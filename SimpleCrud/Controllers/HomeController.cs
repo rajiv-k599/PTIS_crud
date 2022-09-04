@@ -32,12 +32,7 @@ namespace SimpleCrud.Controllers
             _notyf = notyf;
         }
 
-        // private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
+       
         [Authorize]
         [HttpGet]
         public IActionResult Index()
@@ -130,10 +125,7 @@ namespace SimpleCrud.Controllers
         [HttpGet]
         public IActionResult StudentInfo()
         {
-             // StudentVM obj=new StudentVM();
-            //var a=Context.Students.ToList();
-         //    var std = Context.Students.ToList();
-            //var std=obj.students;
+           
             return View(Context.Students.ToList());
         }
 
@@ -183,18 +175,6 @@ namespace SimpleCrud.Controllers
         {
             string stringFile = upload(update);
 
-            //var student = Context.Students.Find(update.Id);
-            ////  users = this.Context.Users.Find(Id);
-            //string deletePath = Path.Combine(".\\wwwroot", "Images");
-            //string fileDeletePath = Path.Combine(deletePath, student.Image);
-            //FileInfo deleteFile = new FileInfo(fileDeletePath);
-            //if (deleteFile.Exists)
-            //{
-            //    deleteFile.Delete();
-            //}
-            //student.Image = stringFile;
-            //this.Context.Students.Update(student);
-            //Context.SaveChanges();
 
             if (update.Image != null)
             {

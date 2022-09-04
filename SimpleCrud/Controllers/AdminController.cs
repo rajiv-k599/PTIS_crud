@@ -33,10 +33,10 @@ namespace SimpleCrud.Controllers
         [HttpPost]
         public IActionResult RegisterInfo(AdminVM A)
         {
-            string password= BCrypt.Net.BCrypt.HashPassword(A.Password);
+           
             if (ModelState.IsValid)
             {
-
+                string password = BCrypt.Net.BCrypt.HashPassword(A.Password);
                 var reg = new Admin
                 {
                     AdminName = A.AdminName,
